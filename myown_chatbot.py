@@ -10,9 +10,9 @@ from rasa_core import utils
 from flask import render_template, Blueprint, jsonify, request
 
 # load your trained agent
-interpreter = RasaNLUInterpreter("models/nlu/default/horoscopebot/")
+interpreter = RasaNLUInterpreter("~")
 MODEL_PATH = "models/dialogue"
-action_endpoint = EndpointConfig(url="https://horoscopebot1212-actions.herokuapp.com/webhook")
+action_endpoint = EndpointConfig(url="https://tabe-chat.herokuapp.com/")
 
 agent = Agent.load(MODEL_PATH, interpreter=interpreter, action_endpoint=action_endpoint)
 
@@ -59,6 +59,6 @@ class MyNewInput(RasaChatInput):
 
         return custom_webhook
 
-input_channel = MyNewInput(url='https://horoscopebot1212.herokuapp.com')
+input_channel = MyNewInput(url='https://tabe-chat.herokuapp.com/')
 # set serve_forever=False if you want to keep the server running
 s = agent.handle_channels([input_channel],  int(os.environ.get('PORT', 5004)), serve_forever=True)
